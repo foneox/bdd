@@ -1,6 +1,5 @@
 package bionic.steps;
 
-import bionic.pages.DictionaryPage;
 import bionic.pages.MainPage;
 import bionic.pages.SearchResultsPage;
 import net.thucydides.core.annotations.Step;
@@ -15,7 +14,6 @@ import static org.hamcrest.Matchers.hasItem;
 
 public class EndUserSteps extends ScenarioSteps {
 
-    DictionaryPage dictionaryPage;
     SearchResultsPage searchResultsPage;
 
     MainPage mainPage;
@@ -23,16 +21,6 @@ public class EndUserSteps extends ScenarioSteps {
     @Step
     public void starts_search() {
         mainPage.lookup_term();
-    }
-
-    @Step
-    public void should_see_definition(String definition) {
-        assertThat(dictionaryPage.getDefinitions(), hasItem(containsString(definition)));
-    }
-
-    @Step
-    public void is_the_home_page() {
-        dictionaryPage.open();
     }
 
     @Step
