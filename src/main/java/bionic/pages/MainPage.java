@@ -17,11 +17,26 @@ public class MainPage extends PageObject {
     @FindBy(className="logo")
     private WebElementFacade logoImage;
 
+    @FindBy(id="field-input-search")
+    private WebElementFacade searchField;
+
+    @FindBy(id="btn-search-top")
+    private WebElementFacade searchButton;
+
 
     public boolean isLogoDisplayed(){
         return logoImage.isCurrentlyVisible();
     }
     public boolean isCatalogDisplayed(){
         return catalogFrame.isCurrentlyVisible();
+    }
+
+    public SearchResultsPage lookup_term() {
+        searchButton.click();
+        return new SearchResultsPage();
+    }
+
+    public void enters_term(String searchTerm) {
+        searchField.sendKeys(searchTerm);
     }
 }
