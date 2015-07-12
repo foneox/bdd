@@ -15,26 +15,6 @@ public class DefinitionSteps {
     @Steps
     EndUserSteps endUser;
 
-    @Given("the user is on the Wikionary home page")
-    @Pending
-    public void givenTheUserIsOnTheWikionaryHomePage() {
-        endUser.is_the_home_page();
-    }
-
-
-    @When("the user looks up the definition of the word '$word'")
-    @Pending
-    public void whenTheUserLooksUpTheDefinitionOf(String word) {
-        endUser.looks_for(word);
-    }
-
-    @Then("they should see the definition '$definition'")
-    @Pending
-    public void thenTheyShouldSeeADefinitionContainingTheWords(String definition) {
-        endUser.should_see_definition(definition);
-    }
-
-
     @Given("main page is opened")
     public void givenMainPageIsOpened() {
         endUser.open_shop();
@@ -48,6 +28,16 @@ public class DefinitionSteps {
     @Then("I see products catalog")
     public void thenISeeProductsCatalog() {
         endUser.should_see_catalog();
+    }
+
+    @When("I search for <phone>")
+    public void whenISearchForPhone(@Named("phoneName") String phoneName) {
+        endUser.looks_for(phoneName);
+    }
+
+    @Then("I see corresponding <smartphoneLink> link as first in the results list")
+    public void thenISeeCorrespondingsmartphoneLinkLinkAsFirstInTheResultsList(@Named("expectedphoneLink") String expectedPhoneLink) {
+        endUser.should_see_expected_link_first_in_results(expectedPhoneLink);
     }
 
 }
