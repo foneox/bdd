@@ -8,7 +8,7 @@ public class ProductPage extends PageObject {
     @FindBy(css = ".active-bg > a")
     private WebElementFacade currentCategory;
 
-    public String getCurrentCategory() {
+    public String getCurrentCategoryName() {
         return currentCategory.getText();
     }
 }

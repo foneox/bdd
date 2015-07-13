@@ -33,6 +33,6 @@ public class EndUserSteps extends ScenarioSteps {
     public void found_product_should_be(int position, String product, String category) {
         assertTrue(StringUtils.containsIgnoreCase(searchResultPage.getProductName(position), product));
         productPage = searchResultPage.openProduct(position);
-        assertTrue(productPage.getCurrentCategory().equals(category));
+        assertTrue(productPage.getCurrentCategoryName().equals(category));
     }
 }
