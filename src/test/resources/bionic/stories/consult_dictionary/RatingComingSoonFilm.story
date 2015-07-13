@@ -1,9 +1,12 @@
 Meta:
 
 Narrative:
-As a product owner
-I want be sure that user cannot rate cooming soon film
-So do not misrepresent statistics
+FOR movie fans
+WHO want to express their opinon of coming soon movies
+THE IMDb product is a Movie Rating website
+THAT do not allow to set a score for coming soon movie
+UNLIKE other sites that allow set a score for coming soon moview
+OUR PRODUCT do not provide misreprent staticstic
 
 Scenario: Denying possibility to rate coming soon film for logged user
 Given logged in user is on main page
