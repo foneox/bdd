@@ -8,7 +8,11 @@ THAT requires logging in to express user opinion
 UNLIKE the sites that don't require logging in
 OUR PRODUCT provides more precise results
 
-Scenario: scenario description
-Given registered user
-When I do something
-Then system is in a different state
+Scenario: Logging in to the system
+Given Registered user with credentials <email>, <password>
+When The user is on IMDB home page
+Then The user can log in to the system
+
+Examples:
+|email|password|
+|bionic.bdd@gmail.com|bionicbdd2015|
