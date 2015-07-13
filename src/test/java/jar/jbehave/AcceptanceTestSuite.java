@@ -1,4 +1,4 @@
-package bionic.jbehave;
+package jar.jbehave;
 
 import net.serenitybdd.jbehave.SerenityStories;
 
