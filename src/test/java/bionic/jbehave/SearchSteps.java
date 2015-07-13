@@ -15,12 +15,12 @@ public class SearchSteps {
         userSteps.is_the_home_page();
     }
 
-    @When("they search for '$product'")
+    @When("they search for <product>")
     public void whenTheySearchFor(String product) {
         userSteps.search_for(product);
     }
 
-    @Then("the product on '$position' position should be '$product' from '$category'")
+    @Then("the product on <position> position should be <product> from <category>")
     public void thenTheFirstAvailableProductShouldBe(int position, String product, String category) {
         userSteps.found_product_should_be(position - 1, product, category);
     }

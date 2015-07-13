@@ -11,5 +11,9 @@ Only phone should be displayed as the first available product
 
 Scenario: Searching for a phone
 Given a guest user is on the Home page
-When they search for 'iPhone 6'
-Then the product on '1' position should be 'iPhone 6' from 'Смартфоны'
+When they search for <product>
+Then the product on <position> position should be <product> from <category>
+
+Examples:
+|product|position|category|
+|iPhone 6|1|Смартфоны|
