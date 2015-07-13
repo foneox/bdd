@@ -1,52 +1,20 @@
 package bionic.steps;
 
-import bionic.pages.DictionaryPage;
 import bionic.pages.MainPage;
+import bionic.pages.SearchPage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.core.steps.ScenarioSteps;
 
-import static ch.lambdaj.Lambda.join;
-import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EndUserSteps extends ScenarioSteps {
 
-    DictionaryPage dictionaryPage;
-
     MainPage mainPage;
-
-    @Step
-    public void enters(String keyword) {
-        dictionaryPage.enter_keywords(keyword);
-    }
-
-    @Step
-    public void starts_search() {
-        dictionaryPage.lookup_terms();
-    }
-
-    @Step
-    public void should_see_definition(String definition) {
-        assertThat(dictionaryPage.getDefinitions(), hasItem(containsString(definition)));
-    }
-
-    @Step
-    public void is_the_home_page() {
-        dictionaryPage.open();
-    }
-
-    @Step
-    public void looks_for(String term) {
-        enters(term);
-        starts_search();
-    }
+    SearchPage searchPage;
 
     @Step
     public void open_shop() {
-        mainPage.open();
+        mainPage.openPage();
     }
 
     @Step
@@ -56,6 +24,22 @@ public class EndUserSteps extends ScenarioSteps {
 
     @Step
     public void should_see_catalog(){
-        assertTrue(mainPage.isCatalogDisplayed());
+        assertThat(mainPage.isCatalogDisplayed()).isTrue();
     }
+
+    @Step
+    public void searches_by_keyword(String keyword) {
+        mainPage.enterSearchTerms(keyword);
+    }
+
+    @Step
+    public void should_see_item_with_title(int number, String name) {
+        assertThat(searchPage.itemTitleContains(number-1, name)).isTrue();
+    }
+
+    @Step
+    public void should_see_items_in_result_list_related_to_category(String category) {
+        assertThat(searchPage.itemsBelongToCategory(category)).isTrue();
+    }
+
 }

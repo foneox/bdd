@@ -1,13 +1,11 @@
 package bionic.jbehave;
 
-import net.thucydides.core.annotations.Pending;
+import bionic.steps.EndUserSteps;
 import net.thucydides.core.annotations.Steps;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-
-import bionic.steps.EndUserSteps;
-import org.jbehave.core.model.Meta;
 
 
 public class DefinitionSteps {
@@ -15,27 +13,9 @@ public class DefinitionSteps {
     @Steps
     EndUserSteps endUser;
 
-    @Given("the user is on the Wikionary home page")
-    @Pending
-    public void givenTheUserIsOnTheWikionaryHomePage() {
-        endUser.is_the_home_page();
-    }
 
-
-    @When("the user looks up the definition of the word '$word'")
-    @Pending
-    public void whenTheUserLooksUpTheDefinitionOf(String word) {
-        endUser.looks_for(word);
-    }
-
-    @Then("they should see the definition '$definition'")
-    @Pending
-    public void thenTheyShouldSeeADefinitionContainingTheWords(String definition) {
-        endUser.should_see_definition(definition);
-    }
-
-
-    @Given("main page is opened")
+    @Given("I am on main page")
+    @Alias("main page is opened")
     public void givenMainPageIsOpened() {
         endUser.open_shop();
     }
@@ -48,6 +28,22 @@ public class DefinitionSteps {
     @Then("I see products catalog")
     public void thenISeeProductsCatalog() {
         endUser.should_see_catalog();
+    }
+
+
+    @When("I search for <product>")
+    public void whenISearchForProduct(String product) {
+        endUser.searches_by_keyword(product);
+    }
+
+    @Then("I should see result list of items which belong to <category>")
+    public void thenIShouldSeeResultListOfItemsWhichBelongTocategory(String category) {
+        endUser.should_see_items_in_result_list_related_to_category(category);
+    }
+
+    @Then("item <number> from result list contains title <product>")
+    public void thenItemNumberFromResultListHasTitleProduct(int number, String title) {
+        endUser.should_see_item_with_title(number, title);
     }
 
 }
