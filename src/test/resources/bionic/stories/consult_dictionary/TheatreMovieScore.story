@@ -5,7 +5,9 @@ As a logged in user
 I am on  showing in theatre movie page
 I want  to set a score to movie
 
-Scenario: scenario description
-Given a system state
-When I do something
-Then system is in a different state
+Scenario: setting score to theatre movie
+Given user is logged in
+And theatre movie page is opened
+When I set score
+Then I see that score is set
+And number of user increased to one
