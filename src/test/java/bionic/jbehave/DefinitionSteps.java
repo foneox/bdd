@@ -50,4 +50,25 @@ public class DefinitionSteps {
         endUser.should_see_catalog();
     }
 
+    @Given("logged in user is on main page")
+    public void givenLoggedInUserIsOnMainPage() {
+
+    }
+
+    @Given("unregistered user is on main page")
+    public void givenUregisteredUserIsOnMainPage() {
+
+    }
+
+
+    @When("user select any coming soon film")
+    public void whenUserSelectAnyComingSoonFilm() {
+
+    }
+
+    @Then("user shouldn't be able to rate film")
+    public void thenUserShouldntBeAbleToRateFilm() {
+
+    }
+
 }
