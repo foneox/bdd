@@ -6,15 +6,10 @@ Meta:
 Narrative:
 As a product owner of sokol.ua
 I want to search for a phone by name
-Where results page consists of phones only
-Where the first available link is the phone that I search
+Where the first available product is the phone that I search
+Only phone should be displayed as the first available product
 
 Scenario: Searching for a phone
 Given a guest user is on the Home page
 When they search for 'iPhone 6'
 Then the product on '1' position should be 'iPhone 6' from 'Смартфоны'
-
-Scenario: Checking that search result consists of phones only
-Given a guest user is on the Home page
-When they search for 'iPhone 6'
-Then the found category should be 'Смартфоны'

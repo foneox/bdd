@@ -25,9 +25,4 @@ public class SearchSteps {
         userSteps.found_product_should_be(position - 1, product, category);
     }
 
-    @Then("the found category should be '$category'")
-    public void thenTheFoundCategoryShouldBe(String category) {
-        userSteps.found_category_should_be(category);
-    }
-
 }
