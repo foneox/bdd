@@ -15,60 +15,64 @@ public class DefinitionSteps {
     @Steps
     EndUserSteps endUser;
 
-    @Given("the user is on the Wikionary home page")
+    @Given("Registered user with credentials <email>, <password>")
     @Pending
-    public void givenTheUserIsOnTheWikionaryHomePage() {
-        endUser.is_the_home_page();
+    public void givenRegisteredUserWithCredentialsemailpassword() {
+        // PENDING
     }
 
-
-    @When("the user looks up the definition of the word '$word'")
+    @When("The user is on IMDB home page")
     @Pending
-    public void whenTheUserLooksUpTheDefinitionOf(String word) {
-        endUser.looks_for(word);
+    public void whenTheUserIsOnIMDBHomePage() {
+        // PENDING
     }
 
-    @Then("they should see the definition '$definition'")
+    @Then("The user can log in to the system")
     @Pending
-    public void thenTheyShouldSeeADefinitionContainingTheWords(String definition) {
-        endUser.should_see_definition(definition);
+    public void thenTheUserCanLogInToTheSystem() {
+        // PENDING
     }
 
-
-    @Given("main page is opened")
-    public void givenMainPageIsOpened() {
-        endUser.open_shop();
+    @Given("Nonregistered user")
+    @Pending
+    public void givenNonregisteredUser() {
+        // PENDING
     }
 
-    @When("I see shop logo")
-    public void whenISeeShopLogo() {
-        endUser.should_see_logo();
+    @When("The user is on IMDB home page")
+    @Pending
+    public void whenTheUserIsOnHomePage() {
+        // PENDING
     }
 
-    @Then("I see products catalog")
-    public void thenISeeProductsCatalog() {
-        endUser.should_see_catalog();
+    @Then("The user can not log in to the system")
+    @Pending
+    public void thenTheUserCanNotLogInToTheSystem() {
+        // PENDING
     }
 
-    @Given("logged in user is on main page")
-    public void givenLoggedInUserIsOnMainPage() {
-
+    @Given("user is logged in")
+    @Pending
+    public void givenUserIsLoggedIn() {
+        // PENDING
     }
 
-    @Given("unregistered user is on main page")
-    public void givenUregisteredUserIsOnMainPage() {
-
+    @Given("theatre movie page is opened")
+    @Pending
+    public void givenTheatreMoviePageIsOpened() {
+        // PENDING
     }
 
-
-    @When("user select any coming soon film")
-    public void whenUserSelectAnyComingSoonFilm() {
-
+    @When("user set score")
+    @Pending
+    public void whenUserSetScore() {
+        // PENDING
     }
 
-    @Then("user shouldn't be able to rate film")
-    public void thenUserShouldntBeAbleToRateFilm() {
-
+    @When("statistic on the site has been changes")
+    @Pending
+    public void whenStatisticOnTheSiteHasBeenChanges() {
+        // PENDING
     }
 
 }
