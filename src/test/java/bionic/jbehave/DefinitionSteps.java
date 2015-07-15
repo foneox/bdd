@@ -3,6 +3,7 @@ package bionic.jbehave;
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
@@ -50,16 +51,6 @@ public class DefinitionSteps {
         endUser.should_see_catalog();
     }
 
-    @Given("logged in user is on main page")
-    public void givenLoggedInUserIsOnMainPage() {
-
-    }
-
-    @Given("unregistered user is on main page")
-    public void givenUregisteredUserIsOnMainPage() {
-
-    }
-
 
     @When("user select any coming soon film")
     public void whenUserSelectAnyComingSoonFilm() {
@@ -69,6 +60,12 @@ public class DefinitionSteps {
     @Then("user shouldn't be able to rate film")
     public void thenUserShouldntBeAbleToRateFilm() {
 
+    }
+
+
+    @When("I search for <phone>")
+    public void whenISearchForPhone(@Named("phoneName") String phoneName) {
+        endUser.looks_for(phoneName);
     }
 
 }

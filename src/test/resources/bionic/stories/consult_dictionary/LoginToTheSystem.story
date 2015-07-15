@@ -23,3 +23,8 @@ Given Nonregistered user
 When The user is on IMDB home page
 Then The user can not log in to the system
 
+Examples:
+|email|password|
+|non.existing.user.adsfadsfasdf@gmail.com|qwerty123456|
+
+
