@@ -1,61 +1,38 @@
 package bionic.steps;
 
-import bionic.pages.DictionaryPage;
-import bionic.pages.MainPage;
+import bionic.pages.HomePage;
+import bionic.pages.ProductPage;
+import bionic.pages.SearchResultPage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.core.steps.ScenarioSteps;
+import org.apache.commons.lang3.StringUtils;
 
-import static ch.lambdaj.Lambda.join;
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
 
 public class EndUserSteps extends ScenarioSteps {
-
-    DictionaryPage dictionaryPage;
-
-    MainPage mainPage;
-
-    @Step
-    public void enters(String keyword) {
-        dictionaryPage.enter_keywords(keyword);
-    }
-
-    @Step
-    public void starts_search() {
-        dictionaryPage.lookup_terms();
-    }
-
-    @Step
-    public void should_see_definition(String definition) {
-        assertThat(dictionaryPage.getDefinitions(), hasItem(containsString(definition)));
-    }
+    HomePage homePage;
+    SearchResultPage searchResultPage;
+    ProductPage productPage;
 
     @Step
     public void is_the_home_page() {
-        dictionaryPage.open();
+        homePage.open();
     }
 
     @Step
-    public void looks_for(String term) {
-        enters(term);
-        starts_search();
+    public void should_see_product_catalog() {
+        assertTrue(homePage.catalogIsDisplayed());
     }
 
     @Step
-    public void open_shop() {
-        mainPage.open();
+    public void search_for(String product) {
+        homePage.search(product);
     }
 
     @Step
-    public void should_see_logo(){
-        mainPage.isLogoDisplayed();
-    }
-
-    @Step
-    public void should_see_catalog(){
-        assertTrue(mainPage.isCatalogDisplayed());
+    public void found_product_should_be(int position, String product, String category) {
+        assertTrue(StringUtils.containsIgnoreCase(searchResultPage.getProductName(position), product));
+        productPage = searchResultPage.openProduct(position);
+        assertTrue(productPage.getCurrentCategoryName().equals(category));
     }
 }
