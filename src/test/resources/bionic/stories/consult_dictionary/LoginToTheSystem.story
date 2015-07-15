@@ -8,18 +8,23 @@ THAT requires logging in to express user opinion
 UNLIKE the sites that don't require logging in
 OUR PRODUCT provides more precise results
 
-Scenario: Logging in to the system
-Given Registered user with credentials <email>, <password>
-When The user is on IMDB home page
-Then The user can log in to the system
+Scenario: Logging in to the system as a registered user
+Given a user is on IMDb home page
+When the user logs in to the system with <login> and <password>
+Then the user is logged in
 
 Examples:
-|email|password|
+|login|password|
 |bionic.bdd@gmail.com|bionicbdd2015|
 
+Meta:
+@ignore
 
-Scenario: Nonregistered user trying to log in to the system
-Given Nonregistered user
-When The user is on IMDB home page
-Then The user can not log in to the system
+Scenario: Logging in to the system as a non-registered user
+Given a user is on IMDb home page
+When the user logs in to the system with <login> and <password>
+Then the user is not logged in
 
+Examples:
+|login|password|
+|iamguest@guest.com|guestpass|

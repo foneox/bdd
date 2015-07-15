@@ -5,14 +5,14 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 
-/**
- * Created by bdd on 13.07.15.
- */
-
 @DefaultUrl("http://www.imdb.com")
 public class ImdbHomePage extends PageObject {
+    @FindBy(id = "nblogin")
+    private WebElementFacade lnkLogin;
 
-    @FindBy(id="catalog")
-    private WebElementFacade catalogFrame;
-
+    public ImdbHomePage login() {
+        lnkLogin.click();
+        //TODO
+        return this;
+    }
 }

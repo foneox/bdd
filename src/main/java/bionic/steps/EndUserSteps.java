@@ -1,8 +1,6 @@
 package bionic.steps;
 
-import bionic.pages.HomePage;
-import bionic.pages.ProductPage;
-import bionic.pages.SearchResultPage;
+import bionic.pages.*;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +9,8 @@ import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 
 public class EndUserSteps extends ScenarioSteps {
     HomePage homePage;
+    ImdbHomePage imdbHomePage;
+    GoogleLoginPage googleLoginPage;
     SearchResultPage searchResultPage;
     ProductPage productPage;
 
@@ -34,5 +34,23 @@ public class EndUserSteps extends ScenarioSteps {
         assertTrue(StringUtils.containsIgnoreCase(searchResultPage.getProductName(position), product));
         productPage = searchResultPage.openProduct(position);
         assertTrue(productPage.getCurrentCategoryName().equals(category));
+    }
+
+    @Step
+    public void isTheImdbHomePage() {
+        imdbHomePage.open();
+    }
+
+    @Step
+    public void logInToTheSystem(String login, String password) {
+        imdbHomePage = logInToTheGoogle(login, password);
+        imdbHomePage.open();
+        imdbHomePage.login();
+    }
+
+    @Step
+    public ImdbHomePage logInToTheGoogle(String login, String password) {
+        googleLoginPage.open();
+        return googleLoginPage.login(login, password);
     }
 }
