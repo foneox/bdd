@@ -1,5 +1,5 @@
 Meta:
-
+@Ignore
 Narrative:
 FOR movie fans
 WHO want to express their opinon of coming soon movies

@@ -15,40 +15,19 @@ public class DefinitionSteps {
     @Steps
     EndUserSteps endUser;
 
-    @Given("Registered user with credentials <email>, <password>")
-    @Pending
-    public void givenRegisteredUserWithCredentialsemailpassword() {
-        // PENDING
+    @Given("user is logged in to Google account using <email> and <password> credentials")
+    public void givenUserIsLoggedInToGoogle(String email,String password) {
+       endUser.loginToGoogle(email,password);
     }
 
-    @When("The user is on IMDB home page")
-    @Pending
+    @When("the user is on IMDB home page")
     public void whenTheUserIsOnIMDBHomePage() {
-        // PENDING
+        endUser.openImdbPage();
     }
 
-    @Then("The user can log in to the system")
-    @Pending
-    public void thenTheUserCanLogInToTheSystem() {
-        // PENDING
-    }
-
-    @Given("Nonregistered user")
-    @Pending
-    public void givenNonregisteredUser() {
-        // PENDING
-    }
-
-    @When("The user is on IMDB home page")
-    @Pending
-    public void whenTheUserIsOnHomePage() {
-        // PENDING
-    }
-
-    @Then("The user can not log in to the system")
-    @Pending
-    public void thenTheUserCanNotLogInToTheSystem() {
-        // PENDING
+    @Then("the user <userName> can log in to the system using Google")
+    public void thenTheUserCanLogInToTheSystem(String userName) {
+        endUser.loginToImdb(userName);
     }
 
     @Given("user is logged in")
