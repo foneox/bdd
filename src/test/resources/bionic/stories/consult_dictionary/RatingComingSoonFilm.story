@@ -9,6 +9,6 @@ UNLIKE other sites that allow set a score for coming soon moview
 OUR PRODUCT do not provide misreprent staticstic
 
 Scenario: Denying possibility to rate coming soon film
-Given user is on main page
+Given logged user is on main page
 When user select any coming soon film
 Then user shouldn't be able to rate film
