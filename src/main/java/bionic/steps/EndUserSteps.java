@@ -1,61 +1,73 @@
 package bionic.steps;
 
-import bionic.pages.DictionaryPage;
-import bionic.pages.MainPage;
+import bionic.pages.*;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.core.steps.ScenarioSteps;
-
-import static ch.lambdaj.Lambda.join;
-import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
 
 public class EndUserSteps extends ScenarioSteps {
 
-    DictionaryPage dictionaryPage;
-
-    MainPage mainPage;
+    GoogleAccountPage googleAccountPage;
+    ImdbHomePage homePage;
+    ImdbLoginPage loginPage;
+    TheatreMoviePage moviePage;
+    ComingSoonMoviePage comingSoonMoviePage;
+    FilmPage filmPage;
 
     @Step
-    public void enters(String keyword) {
-        dictionaryPage.enter_keywords(keyword);
+    public void loginToGoogleAccount(String userName, String password) {
+        googleAccountPage.login(userName, password);
     }
 
     @Step
-    public void starts_search() {
-        dictionaryPage.lookup_terms();
+    public void openHomePage() {
+        homePage.open();
     }
 
     @Step
-    public void should_see_definition(String definition) {
-        assertThat(dictionaryPage.getDefinitions(), hasItem(containsString(definition)));
+    public void loginToSystemViaGoogle() {
+        loginPage.goToLoginOptions();
+        loginPage.logViaGoogle();
     }
 
     @Step
-    public void is_the_home_page() {
-        dictionaryPage.open();
+    public void verifyUserLoggedIn() {
+        homePage.verifyUserIsLogged();
     }
 
     @Step
-    public void looks_for(String term) {
-        enters(term);
-        starts_search();
+    public void loginProcess() {
+        loginToGoogleAccount("bionic.bdd@gmail.com", "bionicbdd2015");
+        homePage.open();
+        loginToSystemViaGoogle();
     }
 
     @Step
-    public void open_shop() {
-        mainPage.open();
+    public void openMoviePage() {
+        moviePage.open();
     }
 
     @Step
-    public void should_see_logo(){
-        mainPage.isLogoDisplayed();
+    public void openComingSoonPage() {
+        comingSoonMoviePage.open();
     }
 
     @Step
-    public void should_see_catalog(){
-        assertTrue(mainPage.isCatalogDisplayed());
+    public void openComingSoonFilm(int index) {
+        comingSoonMoviePage.openMovie(index);
+    }
+
+    @Step
+    public void verifyMovieCannotBeScored() {
+        filmPage.verifyMovieNotReleased();
+    }
+
+    @Step
+    public void setMovieScore(int movieScore) {
+        filmPage.setScore(movieScore);
+    }
+
+    @Step
+    public void verifyMovieScoreChanged() {
+        filmPage.verifyMovieWasScored();
     }
 }
