@@ -27,6 +27,15 @@ public class ImdbHomePage extends PageObject {
     @FindBy(className = "cboxIframe")
     WebElementFacade frame;
 
+    @FindBy(css=".rhs-row>.title>a[href*='hm_cht_t0']")
+    WebElementFacade firstTheatreMovie;
+
+    @FindBy(css=".header>.itemprop")
+    WebElementFacade movieHeader;
+
+    @FindBy(css="a[href*='nb_usr_prof_0']")
+    WebElementFacade userIcon;
+
     private String imdbUrl="http://www.imdb.com/";
 
     public void openImdbPage(){
@@ -42,5 +51,18 @@ public class ImdbHomePage extends PageObject {
         getDriver().close();
         getDriver().switchTo().window(tabs2.get(1));
     }
+
+    public boolean openFirstTheatreMoviePage(){
+        String movieTitle = firstTheatreMovie.getText().replace(" ","");
+        firstTheatreMovie.click();
+        return movieHeader.getText().contains(movieTitle);
+    }
+
+    public boolean isUserDisplayed(String user){
+        return userIcon.isCurrentlyVisible()
+                && userIcon.getText().contains(user);
+    }
+
+
 
 }

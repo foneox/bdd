@@ -2,12 +2,12 @@ package bionic.jbehave;
 
 import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
 import bionic.steps.EndUserSteps;
-import org.jbehave.core.model.Meta;
 
 
 public class DefinitionSteps {
@@ -27,30 +27,28 @@ public class DefinitionSteps {
 
     @Then("the user <userName> can log in to the system using Google")
     public void thenTheUserCanLogInToTheSystem(String userName) {
-        endUser.loginToImdb(userName);
+        endUser.loginToImdb();
+        endUser.isUserLoggedIn(userName);
     }
 
     @Given("user is logged in")
-    @Pending
-    public void givenUserIsLoggedIn() {
-        // PENDING
+    @Alias("user '$user' is logged in")
+    public void givenUserIsLoggedIn(String user) {
+        endUser.generalLogin("bionic.bdd@gmail.com", "bionicbdd2015");
     }
 
     @Given("theatre movie page is opened")
-    @Pending
-    public void givenTheatreMoviePageIsOpened() {
-        // PENDING
+     public void givenTheatreMoviePageIsOpened() {
+        endUser.openTheatreMoviePage();
     }
 
     @When("user set score")
-    @Pending
     public void whenUserSetScore() {
         // PENDING
     }
 
-    @When("statistic on the site has been changes")
-    @Pending
-    public void whenStatisticOnTheSiteHasBeenChanges() {
+    @Then("statistic on the site has been changed")
+     public void whenStatisticOnTheSiteHasBeenChanges() {
         // PENDING
     }
 

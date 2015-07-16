@@ -4,12 +4,8 @@ import bionic.pages.GmailPage;
 import bionic.pages.ImdbHomePage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
-
-import static ch.lambdaj.Lambda.join;
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
+
 
 public class EndUserSteps extends ScenarioSteps {
     GmailPage gMailPage;
@@ -28,7 +24,23 @@ public class EndUserSteps extends ScenarioSteps {
     }
 
     @Step
-    public void loginToImdb(String userName){
+    public void loginToImdb(){
        imdbHomePage.loginToImdb();
+    }
+
+    @Step
+    public void isUserLoggedIn(String user){
+        assertTrue(imdbHomePage.isUserDisplayed(user));
+    }
+
+    @Step
+    public void generalLogin(String email, String password){
+        loginToGoogle(email, password);
+        loginToImdb();
+    }
+
+    @Step
+    public void openTheatreMoviePage(){
+        assertTrue(imdbHomePage.openFirstTheatreMoviePage());
     }
 }
