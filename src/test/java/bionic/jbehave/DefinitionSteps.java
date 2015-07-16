@@ -1,13 +1,11 @@
 package bionic.jbehave;
 
-import net.thucydides.core.annotations.Pending;
+import bionic.steps.EndUserSteps;
 import net.thucydides.core.annotations.Steps;
+import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-
-import bionic.steps.EndUserSteps;
-import org.jbehave.core.model.Meta;
 
 
 public class DefinitionSteps {
@@ -15,60 +13,58 @@ public class DefinitionSteps {
     @Steps
     EndUserSteps endUser;
 
-    @Given("the user is on the Wikionary home page")
-    @Pending
-    public void givenTheUserIsOnTheWikionaryHomePage() {
-        endUser.is_the_home_page();
+    @Given("Registered user with credentials <email>, <password>")
+    public void givenRegisteredUserWithCredentialsemailpassword(String email, String password) {
+        endUser.isLoginedWithGoogle(email, password);
     }
 
-
-    @When("the user looks up the definition of the word '$word'")
-    @Pending
-    public void whenTheUserLooksUpTheDefinitionOf(String word) {
-        endUser.looks_for(word);
+    @When("The user is on IMDB home page")
+    public void whenTheUserIsOnIMDBHomePage() {
+        endUser.opensHomePage();
     }
 
-    @Then("they should see the definition '$definition'")
-    @Pending
-    public void thenTheyShouldSeeADefinitionContainingTheWords(String definition) {
-        endUser.should_see_definition(definition);
+    @Then("The user can log in to the system")
+     public void thenTheUserCanLogInToTheSystem() {
+        endUser.isLoginedTroughGoogleAccount();
     }
 
-
-    @Given("main page is opened")
-    public void givenMainPageIsOpened() {
-        endUser.open_shop();
+    @Given("user is logged in")
+    @Alias("logged in user is on main page")
+    public void givenUserIsLoggedIn() {
+        endUser.loginsWith("bionic.bdd@gmail.com", "bionicbdd2015");
     }
 
-    @When("I see shop logo")
-    public void whenISeeShopLogo() {
-        endUser.should_see_logo();
+    @Given("theatre movie page is opened")
+    public void givenTheatreMoviePageIsOpened() {
+        endUser.openTheatreMovieDetails();
     }
 
-    @Then("I see products catalog")
-    public void thenISeeProductsCatalog() {
-        endUser.should_see_catalog();
+    @When("user set score")
+    public void whenUserSetScore() {
+        endUser.rateMovie();
     }
 
-    @Given("logged in user is on main page")
-    public void givenLoggedInUserIsOnMainPage() {
-
+    @Then("statistic on the site has been changes")
+    public void thenStatisticOnTheSiteHasBeenChanges() {
+        endUser.shouldSeeMovieStatisticChanged();
     }
+
 
     @Given("unregistered user is on main page")
-    public void givenUregisteredUserIsOnMainPage() {
-
+    public void givenUnregisteredUserIsOnMainPage() {
+        endUser.opensHomePage();
+        endUser.logOutIfLogined();
     }
-
 
     @When("user select any coming soon film")
     public void whenUserSelectAnyComingSoonFilm() {
-
+        endUser.opensComingSoonFilmDetails();
     }
 
     @Then("user shouldn't be able to rate film")
     public void thenUserShouldntBeAbleToRateFilm() {
-
+        endUser.shouldNotSeeOwnRate();
     }
+
 
 }

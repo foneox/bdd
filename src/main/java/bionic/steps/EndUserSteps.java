@@ -1,61 +1,72 @@
 package bionic.steps;
 
-import bionic.pages.DictionaryPage;
-import bionic.pages.MainPage;
+import bionic.pages.GmailLoginPage;
+import bionic.pages.ImdbHomePage;
+import bionic.pages.TheatreMoviePage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.pages.Pages;
 import net.thucydides.core.steps.ScenarioSteps;
 
-import static ch.lambdaj.Lambda.join;
-import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EndUserSteps extends ScenarioSteps {
 
-    DictionaryPage dictionaryPage;
-
-    MainPage mainPage;
+    ImdbHomePage homePage;
+    GmailLoginPage gmailLoginPage;
+    TheatreMoviePage theatreMoviePage;
 
     @Step
-    public void enters(String keyword) {
-        dictionaryPage.enter_keywords(keyword);
+    public void opensHomePage() {
+        homePage.openPage();
     }
 
     @Step
-    public void starts_search() {
-        dictionaryPage.lookup_terms();
+    public boolean isLoginedWithGoogle(String login, String pass) {
+        gmailLoginPage.openPage();
+        return gmailLoginPage.enterLogin(login)
+                             .enterPass(pass)
+                             .isLogined();
     }
 
     @Step
-    public void should_see_definition(String definition) {
-        assertThat(dictionaryPage.getDefinitions(), hasItem(containsString(definition)));
+    public void isLoginedTroughGoogleAccount() {
+        assertThat(homePage.loginTroughGoogleAccount().isLogined()).isTrue();
     }
 
     @Step
-    public void is_the_home_page() {
-        dictionaryPage.open();
+    public void loginsWith(String login, String pass) {
+        isLoginedWithGoogle(login, pass);
+        opensHomePage();
+        isLoginedTroughGoogleAccount();
     }
 
     @Step
-    public void looks_for(String term) {
-        enters(term);
-        starts_search();
+    public void openTheatreMovieDetails() {
+        homePage.clickTheatreMovieLink();
     }
 
     @Step
-    public void open_shop() {
-        mainPage.open();
+    public void opensComingSoonFilmDetails() {
+        homePage.clickComingSoonMovieLink();
     }
 
     @Step
-    public void should_see_logo(){
-        mainPage.isLogoDisplayed();
+    public void rateMovie() {
+        theatreMoviePage.clickRateMovieLink();
     }
 
     @Step
-    public void should_see_catalog(){
-        assertTrue(mainPage.isCatalogDisplayed());
+    public void shouldSeeMovieStatisticChanged() {
+        assertThat(theatreMoviePage.isStatisticsChanged()).isTrue();
+    }
+
+    @Step
+    public void shouldNotSeeOwnRate() {
+        rateMovie();
+        assertThat(theatreMoviePage.isYourRateIsDisplyed()).isFalse();
+    }
+
+    @Step
+    public void logOutIfLogined() {
+        if(homePage.isLogined()) homePage.clickLogout();
     }
 }

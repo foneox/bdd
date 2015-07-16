@@ -12,4 +12,4 @@ Scenario: setting score to theatre movie
 Given user is logged in
 And theatre movie page is opened
 When user set score
-And statistic on the site has been changes
+Then statistic on the site has been changes
