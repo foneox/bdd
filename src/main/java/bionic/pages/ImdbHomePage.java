@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -23,9 +24,6 @@ public class ImdbHomePage extends PageObject {
     @FindBy(css=".oauth-link[rel='open_google']")
     WebElementFacade openGoogle;
 
-    @FindBy(css="#hd_msg_icon>a")
-    WebElementFacade imdbUser;
-
     @FindBy(className = "cboxIframe")
     WebElementFacade frame;
 
@@ -39,11 +37,10 @@ public class ImdbHomePage extends PageObject {
         loginBtn.click();
         getDriver().switchTo().frame(frame);
         openGoogle.click();
+        ArrayList<String> tabs2 = new ArrayList<String> (getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs2.get(0));
+        getDriver().close();
+        getDriver().switchTo().window(tabs2.get(1));
     }
-
-    public boolean isImdbUserCorrect(String userName){
-       return imdbUser.getText().contains(userName);
-    }
-
 
 }

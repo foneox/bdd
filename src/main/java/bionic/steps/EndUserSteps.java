@@ -1,6 +1,6 @@
 package bionic.steps;
 
-import bionic.pages.GMailPage;
+import bionic.pages.GmailPage;
 import bionic.pages.ImdbHomePage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
 
 public class EndUserSteps extends ScenarioSteps {
-    GMailPage gMailPage;
+    GmailPage gMailPage;
     ImdbHomePage imdbHomePage;
 
     @Step
@@ -30,6 +30,5 @@ public class EndUserSteps extends ScenarioSteps {
     @Step
     public void loginToImdb(String userName){
        imdbHomePage.loginToImdb();
-       assertTrue(imdbHomePage.isImdbUserCorrect(userName));
     }
 }

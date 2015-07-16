@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
  * Created by 1 on 15.07.2015.
  */
 
-public class GMailPage extends PageObject {
+public class GmailPage extends PageObject {
 
     private String addAccountUrl = "https://accounts.google.com/ServiceLogin?sacu=1&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&hl=uk&service=mail#identifier";
 
