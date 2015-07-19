@@ -18,8 +18,5 @@ Examples:
 |bionic.bdd@gmail.com|bionicbdd2015|
 
 
-Scenario: Nonregistered user trying to log in to the system
-Given Nonregistered user
-When The user is on IMDB home page
-Then The user can not log in to the system
+
 

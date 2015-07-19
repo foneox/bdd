@@ -1,6 +1,7 @@
 package bionic.steps;
 
 import bionic.pages.DictionaryPage;
+import bionic.pages.ImdbHomePage;
 import bionic.pages.MainPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.pages.Pages;
@@ -15,6 +16,7 @@ import static org.hamcrest.Matchers.hasItem;
 public class EndUserSteps extends ScenarioSteps {
 
     DictionaryPage dictionaryPage;
+    ImdbHomePage imdbHomePage;
 
     MainPage mainPage;
 
@@ -57,5 +59,20 @@ public class EndUserSteps extends ScenarioSteps {
     @Step
     public void should_see_catalog(){
         assertTrue(mainPage.isCatalogDisplayed());
+    }
+
+    @Step
+    public void openIMDBHomePage(){
+        imdbHomePage.open();
+    }
+
+    @Step
+    public void logInToImdb(String email, String pasword){
+        imdbHomePage.login(email, pasword);
+    }
+
+    @Step
+    public void verifyUserIsLoggedtoIMDB(){
+        assertTrue(imdbHomePage.isLoggedIn());
     }
 }
