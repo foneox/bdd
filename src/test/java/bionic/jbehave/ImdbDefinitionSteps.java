@@ -1,6 +1,7 @@
 package bionic.jbehave;
 
 import bionic.steps.ImdbUserSteps;
+import net.thucydides.core.annotations.Pending;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -28,6 +29,19 @@ public class ImdbDefinitionSteps {
 
     @Then("The user can log in to the system")
     public void theUserCanLogInToTheSystem(){
-
+        imdbUser.shouldBeLoggedInWhenlogsIntoImdbWithGmail();
     }
+
+    @Given("Nonregistered user")
+    @Pending
+    public void givenNonregisteredUser() {
+        // PENDING
+    }
+
+    @Then("The user can not log in to the system")
+    @Pending
+    public void thenTheUserCanNotLogInToTheSystem() {
+        // PENDING
+    }
+
 }
