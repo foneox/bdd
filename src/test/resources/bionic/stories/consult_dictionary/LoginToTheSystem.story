@@ -11,14 +11,11 @@ OUR PRODUCT provides more precise results
 Scenario: Logging in to the system as a registered user
 Given a user is on IMDb home page
 When the user logs in to the system with <login> and <password>
-Then the user is logged in
+Then the <user> should be logged in
 
 Examples:
-|login|password|
-|bionic.bdd@gmail.com|bionicbdd2015|
-
-Meta:
-@ignore
+|user|login|password|
+|bionicbdd|<hidden>@gmail.com|<hidden>|
 
 Scenario: Logging in to the system as a non-registered user
 Given a user is on IMDb home page
