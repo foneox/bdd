@@ -5,6 +5,7 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 
 
+import javax.activation.MimetypesFileTypeMap;
 import java.io.IOException;
 
 /**
@@ -12,8 +13,14 @@ import java.io.IOException;
  */
 public class DriveFiles {
 
-    public File insertFile(Drive service,String title, String description, String mimeType, String filename) {
+    public static String getMimeType(String filePath){
+        MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
+        return mimetypesFileTypeMap.getContentType(filePath);
+    }
+
+    public File insertFile(Drive service,String title, String description, String filename) {
         // File's metadata.
+        String mimeType = getMimeType(filename);
         File body = new File();
         body.setTitle(title);
         body.setDescription(description);

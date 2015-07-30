@@ -45,11 +45,8 @@ public class UploadFile {
         }
         Drive service = gmailAuthorization.getDriveService(user);
 
-
-        MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
-        String mimeType = mimetypesFileTypeMap.getContentType(TXT_FILE);
         DriveFiles driveFiles = new DriveFiles();
-        driveFiles.insertFile(service,"testTxt.txt","test",mimeType,TXT_FILE);
+        driveFiles.insertFile(service,"testTxt.txt","test",TXT_FILE);
 
 //        // Print the names and IDs for up to 10 files.
 //        FileList result = service.files().list()
