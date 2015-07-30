@@ -1,5 +1,6 @@
 package com.bionic.jbehave.gdrive;
 
+import com.bionic.google.DriveFiles;
 import com.bionic.google.GmailAuthorization;
 import com.bionic.utils.PropertyLoader;
 import com.google.api.services.drive.Drive;
@@ -31,13 +32,10 @@ public class UploadFile {
         return absolutePath;
     }
     private static final String TXT_FILE =
-            getFileAbsPath("/src/test/resources/testData/createProjectRequest/testTxt.txt");
+            getFileAbsPath("/src/test/resources/testData/testTxt.txt");
 
-    @Given("authorized connection to drive")
-    public void authorizedConnection() throws IOException {
-        MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
-        String mimeType = mimetypesFileTypeMap.getContentType(TXT_FILE);
-
+    @Given("authorized connection to $user drive")
+    public void authorizedConnection(String user) throws IOException {
         PropertyLoader.loadProperties();
         GmailAuthorization gmailAuthorization = null;
         try {
@@ -45,27 +43,32 @@ public class UploadFile {
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
-        Drive service = gmailAuthorization.getDriveService();
+        Drive service = gmailAuthorization.getDriveService(user);
 
 
-        // Print the names and IDs for up to 10 files.
-        FileList result = service.files().list()
-                .setMaxResults(10)
-                .execute();
-        List<com.google.api.services.drive.model.File> files = result.getItems();
-        if (files == null || files.size() == 0) {
-            System.out.println("No files found.");
-        } else {
-            System.out.println("Files:");
-            for (com.google.api.services.drive.model.File file : files) {
-                System.out.printf("%s (%s)\n", file.getTitle(), file.getId());
-            }
-        }
+        MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap();
+        String mimeType = mimetypesFileTypeMap.getContentType(TXT_FILE);
+        DriveFiles driveFiles = new DriveFiles();
+        driveFiles.insertFile(service,"testTxt.txt","test",mimeType,TXT_FILE);
+
+//        // Print the names and IDs for up to 10 files.
+//        FileList result = service.files().list()
+//                .setMaxResults(10)
+//                .execute();
+//        List<com.google.api.services.drive.model.File> files = result.getItems();
+//        if (files == null || files.size() == 0) {
+//            System.out.println("No files found.");
+//        } else {
+//            System.out.println("Files:");
+//            for (com.google.api.services.drive.model.File file : files) {
+//                System.out.printf("%s (%s)\n", file.getTitle(), file.getId());
+//            }
+//        }
     }
 
     @When("I upload file to Google drive")
     @Pending
-    public void whenIUploadFileToGoogleDrive() throws IOException {
+    public void whenIUploadFileToGoogleDrive() {
     }
 
     @Then("I see file is on the drive")

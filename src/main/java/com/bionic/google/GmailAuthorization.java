@@ -75,13 +75,14 @@ public class GmailAuthorization {
                         .setDataStoreFactory(dataStoreFactory)
                         .setAccessType("offline")
                         .build();
-        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(clientSecrets.getInstalled().getClientId());
+        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver())
+                .authorize(clientSecrets.getInstalled().getClientId());
         System.out.println("Credentials saved to " + dataStoreDir.getAbsolutePath());
         return credential;
     }
 
 
-    public Credential authorizeDrive() throws IOException {
+    public Credential authorizeDrive(String user) throws IOException {
         InputStream in = new FileInputStream(pathToClientSecret);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -92,8 +93,14 @@ public class GmailAuthorization {
                         .setDataStoreFactory(dataStoreFactory)
                         .setAccessType("offline")
                         .build();
-        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(clientSecrets.getInstalled().getClientId());
-        System.out.println("Credentials saved to " + dataStoreDir.getAbsolutePath());
+//        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(clientSecrets.getInstalled().getClientId());
+//        System.out.println("Credentials saved to " + dataStoreDir.getAbsolutePath());
+//        return credential;
+
+        Credential credential = new AuthorizationCodeInstalledApp(
+                flow, new LocalServerReceiver()).authorize(user);
+        System.out.println(
+                "Credentials saved to " + dataStoreDir.getAbsolutePath());
         return credential;
     }
 
@@ -104,8 +111,8 @@ public class GmailAuthorization {
                 .build();
     }
 
-    public Drive getDriveService() throws IOException {
-        Credential credential = authorizeDrive();
+    public Drive getDriveService(String user) throws IOException {
+        Credential credential = authorizeDrive(user);
         return new Drive.Builder(
                 httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(applicationName)
